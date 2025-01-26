@@ -11,8 +11,34 @@ function addBookToLibrary(){
     const book2 = new Book("Book2","author2",200);
 
     myLibrary.push(book1,book2);
-
-    return myLibrary;
 }
 
-console.log(addBookToLibrary());
+function displayBooks(){
+    addBookToLibrary();
+    const BookNo = document.getElementsByClassName("BookNo");
+    const BookName = document.getElementsByClassName("BookName");
+    const BookAuthor = document.getElementsByClassName("BookAuthor");
+    const BookPages = document.getElementsByClassName("BookPages")
+
+    for(let i=0; i<myLibrary.length; i++){
+        if(BookNo){
+            BookNo[i].innerHTML = i+1;
+        }
+        if(BookName){
+            BookName[i].innerHTML = myLibrary[i].name;
+        }
+        if(BookAuthor){
+            BookAuthor[i].innerHTML = myLibrary[i].author;
+        }
+        if(BookPages){
+            BookPages[i].innerHTML = myLibrary[i].pages;
+        }
+    }
+
+}
+
+document.addEventListener('DOMContentLoaded',
+    function(){
+        displayBooks();
+    }
+);
