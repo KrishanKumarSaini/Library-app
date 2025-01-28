@@ -9,27 +9,32 @@
 </head>
 <body>
     <main>
+        <button id="newBookBtn">New Book</button>
+        <div id="formContainer" style="display:none;">
+            <form id="bookForm">
+                <label for="Name">Book Name:</label><br>
+                <input type="text" id="Name" name="Name" required><br>
+
+                <label for="Author">Book Author:</label><br>
+                <input type="text" id="Author" name="Author" required><br>
+
+                <label for="Pages">Book Pages:</label><br>
+                <input type="text" id="Pages" name="Pages" required><br>
+
+                <button type="submit">Add Book</button>
+            </form>
+        </div>
         <table>
             <thead>
                 <tr>
                     <th>Book No</th>
                     <th>Book Name</th>
                     <th>Book Author</th>
+                    <th>No Of Pages</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="BookNo"></td>
-                    <td class="BookName"></td>
-                    <td class="BookAuthor"></td>
-                    <td class="BookPages"></td>
-                </tr>
-                <tr>
-                    <td class="BookNo"></td>
-                    <td class="BookName"></td>
-                    <td class="BookAuthor"></td>
-                    <td class="BookPages"></td>
-                </tr>
+                
             </tbody>
         </table>
     </main>
