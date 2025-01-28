@@ -61,7 +61,6 @@ newBookBtn.addEventListener('click', function () {
         formContainer.style.display = 'block';
 
         const form = document.getElementById("bookForm");
-        const outputDiv = document.getElementById("outputDiv");
 
         form.addEventListener('submit', function(event){
             event.preventDefault();
