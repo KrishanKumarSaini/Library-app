@@ -1,11 +1,13 @@
 const myLibrary = [];
 
+//Book Object or constructor for creating the book
 function Book(name, author, pages) {
     this.name = name;
     this.author = author;
     this.pages = pages;
 }
 
+//This function 
 function addBookToLibrary(formName, formAuthor, formPages) {
     const newbook = new Book(formName, formAuthor, formPages);
 
@@ -13,10 +15,10 @@ function addBookToLibrary(formName, formAuthor, formPages) {
 }
 
 function displayBooks() {
-    
+
     const tableBody = document.querySelector("table tbody");
 
-    while(tableBody.firstChild){
+    while (tableBody.firstChild) {
         tableBody.removeChild(tableBody.firstChild);
     }
 
@@ -26,9 +28,6 @@ function displayBooks() {
         const book = myLibrary[i];
 
         const row = document.createElement("tr");
-        const bookN0 = document.createElement("td");
-        bookN0.className = "BookNo";
-        bookN0.textContent = i+1;
 
         const bookName = document.createElement("td");
         bookName.className = "BookName";
@@ -42,10 +41,20 @@ function displayBooks() {
         bookPages.className = "BookPages";
         bookPages.textContent = book.pages;
 
-        row.appendChild(bookN0);
+        const removeBtn = document.createElement('button');
+        removeBtn.id = 'RemoveBtn';
+        removeBtn.type = 'button';
+        removeBtn.textContent = 'Remove';
+
+        removeBtn.addEventListener('click', function () {
+            tableBody.removeChild(row);
+            myLibrary.splice(i, 1);
+        });
+
         row.appendChild(bookName);
         row.appendChild(bookAuthor);
         row.appendChild(bookPages);
+        row.appendChild(removeBtn);
 
         tableBody.appendChild(row);
     }
@@ -53,37 +62,34 @@ function displayBooks() {
 
 
 const newBookBtn = document.getElementById("newBookBtn");
+const formContainer = document.getElementById('formContainer');
+const form = document.getElementById("bookForm");
 
-newBookBtn.addEventListener('click', function () {
-    const formContainer = document.getElementById('formContainer');
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
 
-    if (formContainer.style.display === 'none') {
-        formContainer.style.display = 'block';
+    const formData = new FormData(form);
+    const formName = formData.get('Name');
+    const formAuthor = formData.get('Author');
+    const formPages = formData.get('Pages');
 
-        const form = document.getElementById("bookForm");
+    addBookToLibrary(formName, formAuthor, formPages);
+    displayBooks();
 
-        form.addEventListener('submit', function(event){
-            event.preventDefault();
-
-            const formData = new FormData(form);
-            const formName = formData.get('Name');
-            const formAuthor = formData.get('Author');
-            const formPages = formData.get('Pages');
-            
-            addBookToLibrary(formName, formAuthor, formPages);
-            displayBooks();
-
-            form.reset();
-        });
-
-
-    } else {
-        formContainer.style.display = 'none';
-    }
+    form.reset();
 });
 
 
 
+newBookBtn.addEventListener('click', function () {
+
+    if (formContainer.style.display === 'none') {
+        formContainer.style.display = 'block';
+    } else {
+        formContainer.style.display = 'none';
+    }
+
+});
 
 document.addEventListener('DOMContentLoaded',
     function () {
